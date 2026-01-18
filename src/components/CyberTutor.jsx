@@ -73,8 +73,8 @@ const CyberTutor = () => {
             }
 
             // Call Gemini API
-            // Using gemini-1.5-flash as it is the current stable fast model
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+            // Using gemini-2.0-flash as it is the available model for this key
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
