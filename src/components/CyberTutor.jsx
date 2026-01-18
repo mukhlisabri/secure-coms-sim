@@ -24,10 +24,16 @@ const CyberTutor = () => {
     // Contextual Greeting on Route Change
     useEffect(() => {
         const greeting = getContextualGreeting(location.pathname);
-        setMessages(prev => [
-            ...prev,
-            { role: 'system', content: greeting, id: Date.now() }
-        ]);
+        setMessages(prev => {
+            // Prevent duplicate greetings (React Strict Mode or fast re-renders)
+            const lastMsg = prev[prev.length - 1];
+            if (lastMsg && lastMsg.content === greeting) return prev;
+
+            return [
+                ...prev,
+                { role: 'system', content: greeting, id: Date.now() }
+            ];
+        });
         if (!isOpen) {
             // Optional: Auto-open or just show notification badge
         }
@@ -67,7 +73,8 @@ const CyberTutor = () => {
             }
 
             // Call Gemini API
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
+            // Using gemini-1.5-flash as it is the current stable fast model
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

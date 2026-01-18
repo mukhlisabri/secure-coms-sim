@@ -49,7 +49,7 @@ const Layout = ({ children }) => {
             <Lock className="w-5 h-5 text-cyan-400" />
           </div>
           <div>
-            <h1 className="text-cyan-100 font-bold tracking-widest text-sm">SECURE COMMS</h1>
+            <h1 className="text-cyan-100 font-bold tracking-widest text-sm">SECURE COMMS SIMULATOR</h1>
             <p className="text-[10px] text-emerald-500/80 font-mono tracking-wider">SYSTEM SECURE</p>
           </div>
         </div>
@@ -89,7 +89,7 @@ const Layout = ({ children }) => {
         <header className="md:hidden flex items-center justify-between p-4 border-b border-white/5 bg-slate-900/80 backdrop-blur w-full sticky top-0 z-50">
           <div className="flex items-center gap-2">
             <Lock className="w-5 h-5 text-cyan-400" />
-            <span className="font-bold text-slate-200">SECURE COMMS</span>
+            <span className="font-bold text-slate-200">SECURE COMMS SIMULATOR</span>
           </div>
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="text-slate-300">
             {isMobileMenuOpen ? <X /> : <Menu />}

@@ -176,39 +176,45 @@ const RailFence = () => {
                       CALCULATING TRANSPOSTION...
                     </div>
                   ) : (
-                    <div
-                      className="grid gap-x-2 gap-y-4 min-w-max p-4 items-center justify-start overflow-x-auto custom-scrollbar"
-                      style={{
-                        gridTemplateRows: `repeat(${railCount}, 1fr)`,
-                        // Use raw length safely
-                        gridTemplateColumns: `repeat(${MISSION_DATA.ciphertext.length}, minmax(40px, 1fr))`
-                      }}
-                    >
-                      {matrix && matrix.map((row, rIndex) => (
-                        row.map((char, cIndex) => (
-                          <div key={`${rIndex}-${cIndex}`} className="w-10 h-10 flex items-center justify-center relative">
-                            {char && (
-                              <motion.div
-                                layoutId={`char-${char}-${cIndex}`}
-                                initial={{ opacity: 0, scale: 0.5 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                                className={cn(
-                                  "w-10 h-10 flex items-center justify-center rounded-lg font-mono text-lg font-bold shadow-lg border",
-                                  "bg-slate-800 text-cyan-300 border-cyan-500/30 shadow-cyan-900/20"
-                                )}
-                              >
-                                {char}
-                              </motion.div>
-                            )}
-                            {/* Rail guide dot */}
-                            {!char && (
-                              <div className="w-1 h-1 bg-slate-800 rounded-full"></div>
-                            )}
-                          </div>
-                        ))
-                      ))}
-                    </div>
+                    !matrix || matrix.length === 0 ? (
+                      <div className="absolute inset-0 flex items-center justify-center text-red-500/50 font-mono">
+                        GRID INITIALIZATION ERROR
+                      </div>
+                    ) : (
+                      <div
+                        className="grid gap-x-1 gap-y-2 min-w-max p-4 items-center justify-start overflow-x-auto custom-scrollbar"
+                        style={{
+                          gridTemplateRows: `repeat(${railCount}, 1fr)`,
+                          // Use raw length safely
+                          gridTemplateColumns: `repeat(${MISSION_DATA.ciphertext.length}, minmax(32px, 1fr))`
+                        }}
+                      >
+                        {matrix.map((row, rIndex) => (
+                          row.map((char, cIndex) => (
+                            <div key={`${rIndex}-${cIndex}`} className="w-8 h-8 flex items-center justify-center relative">
+                              {char && (
+                                <motion.div
+                                  layoutId={`char-${char}-${cIndex}`}
+                                  initial={{ opacity: 0, scale: 0.5 }}
+                                  animate={{ opacity: 1, scale: 1 }}
+                                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                                  className={cn(
+                                    "w-8 h-8 flex items-center justify-center rounded-lg font-mono text-base font-bold shadow-lg border",
+                                    "bg-slate-800 text-cyan-300 border-cyan-500/30 shadow-cyan-900/20"
+                                  )}
+                                >
+                                  {char}
+                                </motion.div>
+                              )}
+                              {/* Rail guide dot */}
+                              {!char && (
+                                <div className="w-1 h-1 bg-slate-800 rounded-full"></div>
+                              )}
+                            </div>
+                          ))
+                        ))}
+                      </div>
+                    )
                   )}
                 </div>
               </div>
